@@ -11,6 +11,9 @@ File("../input.txt").readLines().forEach {
     }
 }
 
-val (elf, calories) = caloriesPerElf.maxBy { it.value }
+val caloriesOfTop3Elves = caloriesPerElf.toList()
+    .sortedBy { (_, value) -> -value }
+    .take(3)
+    .sumOf(Pair<Int, Int>::second)
 
-print("Elf #$elf carries the most food with $calories calories.")
+print("The top 3 elves carry $caloriesOfTop3Elves calories with them.")
