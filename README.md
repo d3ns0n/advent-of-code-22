@@ -20,3 +20,4 @@ My participation in Advent of Code - [https://adventofcode.com](https://adventof
     - [Part 2](./day-4/part-2/instructions.md)
 - Day 5
     - [Part 1](./day-5/part-1/instructions.md)
+    - [Part 2](./day-5/part-2/instructions.md)
