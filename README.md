@@ -27,3 +27,5 @@ My participation in Advent of Code - [https://adventofcode.com](https://adventof
 - Day 7
   - [Part 1](./src/day-7/part-1/instructions.md)
   - [Part 2](./src/day-7/part-2/instructions.md)
+- Day 8
+  - [Part 1](./src/day-8/part-1/instructions.md)
