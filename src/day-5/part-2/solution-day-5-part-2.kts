@@ -1,9 +1,7 @@
 import java.io.File
-import java.util.Queue
-import java.util.Stack
 
-val stacks: MutableList<MutableList<Char>> = mutableListOf();
-val rearrangementProcedures: MutableList<Triple<Int, Int, Int>> = mutableListOf();
+val stacks: MutableList<MutableList<Char>> = mutableListOf()
+val rearrangementProcedures: MutableList<Triple<Int, Int, Int>> = mutableListOf()
 
 fun initStacks(numberOfStacks: Int) {
     for (i in 0 until numberOfStacks) {
@@ -54,12 +52,12 @@ fun readFromFile(file: File) {
 
 fun applyRearrangementProcedures() {
     for (rearrangementProcedure in rearrangementProcedures) {
-        for (i in 0 until rearrangementProcedure.first) {
-            val crate = stacks[rearrangementProcedure.second - 1].removeLastOrNull()
-            if (crate != null) {
-                stacks[rearrangementProcedure.third - 1].add(crate)
-            }
-        }
+        val fromStack = stacks[rearrangementProcedure.second - 1]
+        val toStack = stacks[rearrangementProcedure.third - 1]
+        val fromSplitIndex = fromStack.size - rearrangementProcedure.first
+        val crates = fromStack.subList(fromSplitIndex, fromStack.size)
+        stacks[rearrangementProcedure.second - 1] = fromStack.subList(0, fromSplitIndex)
+        toStack.addAll(crates)
     }
 }
 
