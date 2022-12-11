@@ -1,4 +1,4 @@
-package `day-7`.`part-1`
+package `day-7`
 
 interface FileSystemItem {
     val name: String

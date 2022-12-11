@@ -35,10 +35,10 @@ fun process(string: String) {
     }
 }
 
-fun findDirectoriesWithSizeUpTo(
+fun findDirectoriesWithSizeFrom(
     itemsToProcess: List<FileSystemItem>,
     foundItems: MutableList<FileSystemItem>,
-    limit: Int
+    minSize: Int
 ): List<FileSystemItem> {
     val directories = itemsToProcess.filterIsInstance<Directory>()
     if (directories.isEmpty()) {
@@ -49,17 +49,26 @@ fun findDirectoriesWithSizeUpTo(
         mutableListOf<FileSystemItem>(*directories.drop(1).toTypedArray()).apply {
             this.addAll(firstDirectory.content)
         }
-    if (firstDirectory.size <= limit) {
+    if (firstDirectory.size >= minSize) {
         foundItems.add(firstDirectory)
     }
-    return findDirectoriesWithSizeUpTo(remainingDirectories, foundItems, limit)
+    return findDirectoriesWithSizeFrom(remainingDirectories, foundItems, minSize)
 }
 
 java.io.File("../input.txt").readLines()
     .forEach { process(it) }
 
-val wantedFileSystemItems = findDirectoriesWithSizeUpTo(root.content, mutableListOf(), 100000)
-val totalSize = wantedFileSystemItems.sumOf { it.size }
-println(totalSize)
+val totalDiskSpace = 70000000
+val desiredFreeDiskSpace = 30000000
+val freeDiskSpace = totalDiskSpace - root.size
+val neededDiskSpace = desiredFreeDiskSpace - freeDiskSpace
 
-assert(totalSize == 1077191)
+val wantedDirectorySize =
+    findDirectoriesWithSizeFrom(root.content, mutableListOf(), neededDiskSpace)
+        .sortedBy { it.size }
+        .first()
+        .size
+
+println(wantedDirectorySize)
+
+assert(wantedDirectorySize == 5649896)
