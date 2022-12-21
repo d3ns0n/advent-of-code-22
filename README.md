@@ -30,3 +30,6 @@ My participation in Advent of Code - [https://adventofcode.com](https://adventof
 - Day 8
   - [Part 1](./src/day-8/part-1/instructions.md)
   - [Part 2](./src/day-8/part-2/instructions.md)
+- Day 9
+  - [Part 1](./src/day-9/part-1/instructions.md)
+  - [Part 2](./src/day-9/part-2/instructions.md)
