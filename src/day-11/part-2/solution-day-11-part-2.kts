@@ -1,5 +1,7 @@
 package `day-11`.`part-2`
 
+import `day-11`.Monkey
+
 val monkey0 = Monkey()
 val monkey1 = Monkey()
 val monkey2 = Monkey()
@@ -52,16 +54,14 @@ monkey7.analyse(items = mutableListOf(83, 75),
 val monkeys: List<Monkey> =
     mutableListOf(monkey0, monkey1, monkey2, monkey3, monkey4, monkey5, monkey6, monkey7)
 
-val commonMultiple = monkeys.map { m -> m.divisor }.fold(1.toLong()) { acc, l -> acc * l }
+val commonMultiple = monkeys.map { monkey -> monkey.divisor }.fold(1.toLong()) { acc, l -> acc * l }
 
 for (i in 1..10000) {
-    monkeys.forEach { it.inspectItems(commonMultiple) }
+    monkeys.forEach { it.inspectItems { x -> x.mod(commonMultiple) } }
 }
 
-val monkeyInteractions =
-    monkeys.sortedByDescending { it.inspections }.map { it.inspections }.also { println(it) }
-
-val result = monkeyInteractions[0].toLong() * monkeyInteractions[1].toLong()
+val monkeyInteractions = monkeys.sortedByDescending { it.inspections }.map { it.inspections }
+val result = monkeyInteractions[0] * monkeyInteractions[1]
 
 println(result)
 
